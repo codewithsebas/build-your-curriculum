@@ -7,7 +7,10 @@ export const getUserSession = async () => {
 
 export const signInWithGoogle = async () => {
   const { error } = await supabase.auth.signInWithOAuth({
-    provider: 'google'
+    provider: 'google',
+    options: {
+      redirectTo: `/dashboard`,
+    },
   });
   if (error) console.error('Error de autenticación:', error.message);
 };
