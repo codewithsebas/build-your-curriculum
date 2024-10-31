@@ -255,7 +255,7 @@ const TemplateDev: React.FC<TemplateDevProps> = ({
                 </div>
             </div>
 
-            <button onClick={handleDownloadPDF} className="flex items-center gap-2 px-4 py-2 bg-customizable absolute bottom-5 right-5 text-white rounded-md duration-200 hover:bg-customizable/90">
+            <button onClick={handleDownloadPDF} className="flex items-center gap-2 px-4 py-2 bg-customizable fixed bottom-5 right-5 text-white rounded-md duration-200 hover:bg-customizable/90">
                 Descargar <FileText size={18} />
             </button>
         </div>
