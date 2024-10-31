@@ -25,13 +25,10 @@ const Header = () => {
                         </Avatar>
                         <p>{name}</p>
                     </DropdownMenuTrigger>
-                    <DropdownMenuContent className="w-56 me-10 mt-2">
+                    <DropdownMenuContent className="w-56 ms-8 mt-2">
                         <DropdownMenuLabel>Mi cuenta</DropdownMenuLabel>
                         <DropdownMenuSeparator />
                         <DropdownMenuGroup>
-                            <DropdownMenuItem>
-                                Perfil
-                            </DropdownMenuItem>
                             <DropdownMenuItem>
                                 Plantillas
                             </DropdownMenuItem>
@@ -40,7 +37,6 @@ const Header = () => {
                         <DropdownMenuItem>
                             <Link href="https://github.com/codewithsebas/build-your-curriculum" className='w-full flex justify-between' target='_blank'>GitHub <Github size={17} className='text-black/40' /></Link>          
                         </DropdownMenuItem>
-                        <DropdownMenuSeparator />
                     </DropdownMenuContent>
                 </DropdownMenu>
             </div>

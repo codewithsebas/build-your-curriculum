@@ -1,6 +1,7 @@
 import { FileText, ImagePlus } from 'lucide-react';
 import Image from 'next/image';
 import React, { useRef, useState } from 'react';
+import { useGlobalStore } from '../store/useGlobalStore';
 
 interface CurriculumData {
     name: string;
@@ -52,7 +53,8 @@ const TemplateDev: React.FC<TemplateDevProps> = ({
     curriculumData,
     onChange
 }) => {
-    const { name, title, summary, skills, experience, education, certifications, languages, references, profilePicture } = curriculumData;
+    const { role:roleLocal, name: nameLocal } = useGlobalStore();
+    const { name, summary, skills, experience, education, certifications, languages, references, profilePicture } = curriculumData;
     const templateRef = useRef<HTMLDivElement>(null);
     const [isGeneratingPDF, setIsGeneratingPDF] = useState(false);
 
@@ -117,8 +119,8 @@ const TemplateDev: React.FC<TemplateDevProps> = ({
                     </label>
 
                     <div className='text-black/80 flex flex-col justify-center'>
-                        <h2 className="text-3xl font-semibold">{name}</h2>
-                        <h4 className="text-xl font-medium text-black/40">{title}</h4>
+                        <h2 className="text-3xl font-semibold">{nameLocal}</h2>
+                        <h4 className="text-xl font-medium text-black/40">{roleLocal}</h4>
                     </div>
                 </div>
                 <div className='w-full h-full relative'>
