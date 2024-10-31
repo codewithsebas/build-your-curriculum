@@ -2,7 +2,7 @@
 import { useEffect } from "react";
 import { getUserSession } from "@/utils/supabase/authServer";
 import { useRouter } from "next/navigation";
-import LoginButton from "@/app/components/LoginButton";
+import LoginButton from "@/components/LoginButton";
 
 const LoginPage = () => {
   const router = useRouter();

@@ -8,12 +8,13 @@ const LogoutButton = () => {
     const router = useRouter();
 
     const handleSignOut = async () => {
+        localStorage.removeItem("userRole");
         const success = await signOut();
         if (success) {
             router.push("/login");
         }
     };
-    return <Button variant="outline" aria-busy="true"
+    return <Button aria-busy="true"
         aria-label="Login Button" className='rounded-full py-3 font-normal' onClick={handleSignOut}>
         <LogOut /> Cerrar sesión
     </Button>

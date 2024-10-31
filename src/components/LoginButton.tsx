@@ -1,3 +1,4 @@
+"use client"
 import { Button } from "@/components/ui/button";
 import { signInWithGoogle } from "@/utils/supabase/authServer";
 import Image from "next/image";

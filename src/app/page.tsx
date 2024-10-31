@@ -1,11 +1,17 @@
-import LoginButton from "./components/LoginButton";
+"use client";
+import { usePathname, useRouter } from "next/navigation";
+import { useEffect } from "react";
 
 export default function Home() {
-  return (
-    <div className="flex flex-col gap-5 items-center justify-center w-full min-h-screen">
-      Bienvenido
+  const pathname = usePathname();
+  const router = useRouter();
 
-      <LoginButton/> 
-    </div>
-  );
+  useEffect(() => {
+    if (pathname === "/") {
+      router.push("/login");
+    }
+  }, [pathname, router]);
+  if (pathname === "/") {
+    return null;
+  }
 }
