@@ -75,11 +75,11 @@ const TemplateDev: React.FC<TemplateDevProps> = ({
             const html2pdf = (await import('html2pdf.js')).default;
             html2pdf().set({
                 margin: 10,
-                filename: `${name}-Curriculum.pdf`,
+                filename: `${nameLocal}-Curriculum.pdf`,
                 image: { type: 'jpeg', quality: 0.98 },
                 html2canvas: { scale: 4 },
                 jsPDF: { unit: 'pt', format: 'a4', orientation: 'portrait' },
-            }).from(templateRef.current).save(`${name}-Curriculum.pdf`).finally(() => {
+            }).from(templateRef.current).save(`${nameLocal}-Curriculum.pdf`).finally(() => {
                 setIsGeneratingPDF(false);
             });
         }
