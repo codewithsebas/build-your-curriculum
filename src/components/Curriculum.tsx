@@ -11,7 +11,7 @@ const Curriculum: React.FC = () => {
     const [isClient, setIsClient] = useState(false);
 
     useEffect(() => {
-        setIsClient(true); // Marca que estás en el lado del cliente
+        setIsClient(true);
     }, []);
 
     const [curriculumData, setCurriculumData] = useState<CurriculumData>(() => {
@@ -86,8 +86,8 @@ const Curriculum: React.FC = () => {
     }
 
     return (
-        <div className="flex items-center justify-center gap-5 w-full lg:min-h-screen bg-slate-100 p-5">
-            <div className="max-w-7xl h-full w-full flex flex-col gap-3 bg-white border border-slate-200 rounded-xl shadow-sm lg:max-h-screen overflow-hidden lg:flex-row">
+        <div className="flex items-center justify-center gap-5 w-full lg:min-h-screen bg-slate-100">
+            <div className="max-w-7xl h-full w-full flex flex-col gap-3 bg-white border border-slate-200 lg:rounded-xl shadow-sm lg:max-h-screen lg:overflow-hidden lg:flex-row">
                 <div className="w-full lg:w-2/5 flex flex-col p-6 border-e">
                     <Header />
                     <Form curriculumData={curriculumData} onChange={handleChange} />

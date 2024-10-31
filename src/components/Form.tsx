@@ -12,7 +12,7 @@ const Form: React.FC<{ curriculumData: FormData; onChange: (field: keyof FormDat
     };
 
     return (
-        <form className="bg-white w-full text-sm h-[50rem] overflow-y-scroll mt-5">
+        <form className="bg-white w-full text-sm lg:h-[50rem] lg:overflow-y-scroll mt-5">
             <label className="block mb-4 font-medium text-base border-b pb-1">Sobre ti</label>
             <div className='flex flex-col gap-2'>
                 <InputField
