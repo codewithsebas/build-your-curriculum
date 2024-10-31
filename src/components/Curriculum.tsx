@@ -3,11 +3,9 @@ import TemplateDev from '@/app/templates/TemplateDev';
 import React, { useState, useEffect } from 'react';
 import Form from './Form';
 import Header from './Header';
-import useSession from '@/hooks/useSession';
 import { Certification, CurriculumData, Education, Experience } from '@/interfaces/Curriculum';
 
 const Curriculum: React.FC = () => {
-    const { session } = useSession();
     const [isClient, setIsClient] = useState(false);
 
     useEffect(() => {
@@ -46,15 +44,6 @@ const Curriculum: React.FC = () => {
             };
         }
     });
-
-    useEffect(() => {
-        if (session && isClient) {
-            setCurriculumData((prevData) => ({
-                ...prevData,
-                name: prevData.name || session.user?.user_metadata?.full_name || '',
-            }));
-        }
-    }, [session, isClient]);
 
     useEffect(() => {
         if (typeof window !== 'undefined') {

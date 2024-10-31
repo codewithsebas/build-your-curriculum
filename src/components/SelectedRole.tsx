@@ -3,43 +3,24 @@ import { ChevronDown } from "lucide-react";
 import Image from "next/image";
 import React, { useState, useEffect, useCallback } from "react";
 import { Button } from "./ui/button";
+import { useGlobalStore } from "@/app/store/useGlobalStore";
 
 const SelectedRole = () => {
-    const [selections, setSelections] = useState({ role: "", origin: "" });
+    const { role, origin, name, setRole, setOrigin, setName } = useGlobalStore();
     const [activeField, setActiveField] = useState<"role" | "origin" | null>(null);
     const [activeInfo, setActiveInfo] = useState(false);
+    const [isCompleted, setIsCompleted] = useState(false); // Estado para verificar si el proceso está completo
 
     const fields = {
-        role: {
-            label: "¿Cuál es tu rol actual de trabajo?",
-            options: [
-                "Desarrollador Frontend",
-                "Desarrollador Backend",
-                "Desarrollador Full Stack",
-                "Diseñador UX/UI",
-                "DevOps Engineer",
-                "QA Tester",
-                "Otro"
-            ]
-        },
-        origin: {
-            label: "¿De qué App vienes?",
-            options: [
-                "LinkedIn",
-                "GitHub",
-                "Instagram",
-                "WhatsApp",
-                "Twitter",
-                "Otro"
-            ]
-        }
+        role: { label: "¿Cuál es tu rol actual de trabajo?", options: ["Desarrollador Frontend", "Desarrollador Backend", "Desarrollador Full Stack", "Diseñador UX/UI", "DevOps Engineer", "QA Tester", "Otro"] },
+        origin: { label: "¿De qué App vienes?", options: ["LinkedIn", "GitHub", "Instagram", "WhatsApp", "Twitter", "Otro"] }
     };
 
     const closeDropdown = () => setActiveField(null);
 
     const handleSelect = (field: "role" | "origin", value: string) => {
-        const newSelections = { ...selections, [field]: value };
-        setSelections(newSelections);
+        if (field === "role") setRole(value);
+        else if (field === "origin") setOrigin(value);
         closeDropdown();
     };
 
@@ -52,40 +33,59 @@ const SelectedRole = () => {
         return () => document.removeEventListener("mousedown", handleClickOutside);
     }, [handleClickOutside]);
 
+    // Cargar estado inicial desde localStorage
     useEffect(() => {
-        const storedRole = localStorage.getItem("userRole");
-        if (storedRole) {
-            setSelections((prev) => ({ ...prev, role: storedRole }));
-            setActiveInfo(true);
-        }
-    }, []);
+        const storedRole = localStorage.getItem("role");
+        const storedOrigin = localStorage.getItem("origin");
+        const storedName = localStorage.getItem("name");
+        const storedIsCompleted = localStorage.getItem("isCompleted");
 
-    if (activeInfo && localStorage.getItem("userRole")) {
-        setTimeout(() => {
-            return null;
-        }, 1000)
+        if (storedRole) setRole(storedRole);
+        if (storedOrigin) setOrigin(storedOrigin);
+        if (storedName) setName(storedName);
+        if (storedIsCompleted === "true") setIsCompleted(true);
+    }, [setRole, setOrigin, setName]);
+
+    if (isCompleted) {
+        return null;
     }
+
+    const handleReady = () => {
+        localStorage.setItem("name", name);
+        localStorage.setItem("role", role);
+        localStorage.setItem("origin", origin);
+        localStorage.setItem("isCompleted", "true");
+        setActiveInfo(true);
+        setIsCompleted(true);
+    };
 
     return (
         <div className={`fixed top-0 z-20 w-full min-h-screen bg-white flex items-center justify-center duration-200 ${activeInfo && 'opacity-0 -translate-y-10 pointer-events-none'}`}>
             <div className="w-full h-full max-w-sm flex flex-col gap-10">
                 <Header />
                 <div className="flex flex-col gap-3">
+                    <input
+                        type="text"
+                        placeholder="Escribe tu nombre"
+                        autoFocus
+                        value={name}
+                        onChange={(e) => setName(e.target.value)}
+                        className="bg-slate-50 p-3 py-2.5 outline-none border border-transparent rounded-md placeholder:text-slate-500 "
+                    />
                     {Object.keys(fields).map((field) => (
                         <SelectableField
                             key={field}
-                            label={selections[field as keyof typeof selections] || fields[field as keyof typeof fields].label}
+                            label={(field === "role" ? role : origin) || fields[field as keyof typeof fields].label}
                             options={fields[field as keyof typeof fields].options}
                             isOpen={activeField === field}
                             onSelect={(value) => handleSelect(field as "role" | "origin", value)}
                             onToggle={() => setActiveField(activeField === field ? null : (field as "role" | "origin"))}
-                            isSelected={!!selections[field as keyof typeof selections]}
+                            isSelected={!!(field === "role" ? role : origin)}
                         />
                     ))}
-                    <Button onClick={() => {
-                        localStorage.setItem("userRole", selections.role);
-                        setActiveInfo(true);
-                    }} variant="customizable" disabled={!selections.role || !selections.origin} className="py-5">Listo</Button>
+                    <Button onClick={handleReady} variant="customizable" disabled={!name || !role || !origin} className="py-5">
+                        Listo
+                    </Button>
                 </div>
             </div>
         </div>
@@ -115,7 +115,7 @@ type SelectableFieldProps = {
 
 const SelectableField: React.FC<SelectableFieldProps> = ({ label, options, isOpen, onSelect, onToggle, isSelected }) => (
     <div
-        className={`select-none flex items-center gap-2 justify-between bg-slate-50 p-3 py-2 rounded-md cursor-pointer border border-transparent relative duration-200 ${isSelected && 'bg-white border-customizable'}`}
+        className={`select-none flex items-center gap-2 justify-between bg-slate-50 p-3 py-2 rounded-md cursor-pointer border border-transparent relative duration-200 ${isSelected && 'bg-white !border !border-customizable/50'}`}
         onClick={onToggle}
         data-dropdown="true"
     >

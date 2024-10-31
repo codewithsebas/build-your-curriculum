@@ -15,18 +15,6 @@ const Form: React.FC<{ curriculumData: FormData; onChange: (field: keyof FormDat
         <form className="bg-white w-full text-sm lg:h-[50rem] lg:overflow-y-scroll mt-5">
             <label className="block mb-4 font-medium text-base border-b pb-1">Sobre ti</label>
             <div className='flex flex-col gap-2'>
-                <InputField
-                    value={curriculumData.name}
-                    onChange={(value) => handleFieldChange('name', value)}
-                    placeholder="Nombre completo"
-                    required
-                />
-                <InputField
-                    value={curriculumData.title}
-                    onChange={(value) => handleFieldChange('title', value)}
-                    placeholder="Título del rol"
-                    required
-                />
                 <TextareaField
                     value={curriculumData.summary}
                     onChange={(value) => handleFieldChange('summary', value)}

@@ -8,7 +8,7 @@ export default function Home() {
 
   useEffect(() => {
     if (pathname === "/") {
-      router.push("/login");
+      router.push("/dashboard");
     }
   }, [pathname, router]);
   if (pathname === "/") {

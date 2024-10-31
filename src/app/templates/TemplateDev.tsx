@@ -89,7 +89,7 @@ const TemplateDev: React.FC<TemplateDevProps> = ({
         <div className="w-full h-full lg:w-3/5 lg:max-h-fit p-4 ps-1 break-words lg:h-[56rem] lg:overflow-y-auto lg:overflow-x-hidden border-t lg:border-none">
             <div ref={templateRef}>
                 <div className='flex items-center w-full gap-5 p-2 pb-5'>
-                    <label htmlFor="profilePicture" className='w-24 h-24 max-w-24 max-h-24 flex items-center justify-center cursor-pointer border-2 bg-slate-50 border-white rounded-xl shadow-md'>
+                    <label htmlFor="profilePicture" className='w-24 h-24 max-w-24 max-h-24 flex items-center justify-center cursor-pointer border-2 bg-slate-50 border-white rounded-full shadow-md'>
                         {profilePicture ? (
                             <div className='relative'>
                                 <Image
@@ -97,7 +97,7 @@ const TemplateDev: React.FC<TemplateDevProps> = ({
                                     alt={`${name}'s profile`}
                                     width={100}
                                     height={100}
-                                    className='w-full h-full object-cover rounded-xl'
+                                    className='w-full h-full object-cover rounded-full'
                                 />
                                 <div className={`w-8 h-8 bg-white rounded-full absolute z-0 -top-2 border border-slate-50 -right-2 flex items-center justify-center shadow ${isGeneratingPDF ? 'hidden' : ''}`}>
                                     <ImagePlus size={15} className='text-slate-400' />
@@ -175,12 +175,12 @@ const TemplateDev: React.FC<TemplateDevProps> = ({
                                         </div>
                                     ) : (
                                         <div className='flex flex-col gap-2'>
-                                            <span className='flex rounded-lg w-40 bg-slate-50 h-10 text-slate-500'></span>
-                                            <span className='flex rounded-lg w-40 bg-slate-50 h-10 text-slate-500'></span>
-                                            <span className='flex rounded-lg w-40 bg-slate-50 h-10 text-slate-500'></span>
-                                            <span className='flex rounded-lg w-40 bg-slate-50 h-10 text-slate-500'></span>
-                                            <span className='flex rounded-lg w-40 bg-slate-50 h-10 text-slate-500'></span>
-                                            <span className='flex rounded-lg w-40 bg-slate-50 h-10 text-slate-500'></span>
+                                            <span className='flex rounded-lg w-100 bg-slate-50 h-10 text-slate-500'></span>
+                                            <span className='flex rounded-lg w-100 bg-slate-50 h-10 text-slate-500'></span>
+                                            <span className='flex rounded-lg w-100 bg-slate-50 h-10 text-slate-500'></span>
+                                            <span className='flex rounded-lg w-100 bg-slate-50 h-10 text-slate-500'></span>
+                                            <span className='flex rounded-lg w-100 bg-slate-50 h-10 text-slate-500'></span>
+                                            <span className='flex rounded-lg w-100 bg-slate-50 h-10 text-slate-500'></span>
                                         </div>
                                     )}
 
@@ -195,8 +195,8 @@ const TemplateDev: React.FC<TemplateDevProps> = ({
                                         </div>
                                     ) : (
                                         <div className='flex flex-col gap-2'>
-                                            <span className='flex rounded-lg w-40 bg-slate-50 h-10 text-slate-500'></span>
-                                            <span className='flex rounded-lg w-40 bg-slate-50 h-10 text-slate-500'></span>
+                                            <span className='flex rounded-lg w-100 bg-slate-50 h-10 text-slate-500'></span>
+                                            <span className='flex rounded-lg w-100 bg-slate-50 h-10 text-slate-500'></span>
                                         </div>
                                     )}
                                 </div>
