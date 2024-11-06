@@ -99,7 +99,7 @@ const TemplateDev: React.FC<TemplateDevProps> = ({
                                     alt={`${name}'s profile`}
                                     width={100}
                                     height={100}
-                                    className='w-full h-full object-cover rounded-full'
+                                    className='object-cover rounded-full w-24 h-24 max-w-24 max-h-24'
                                 />
                                 <div className={`w-8 h-8 bg-white rounded-full absolute z-0 -top-2 border border-slate-50 -right-2 flex items-center justify-center shadow ${isGeneratingPDF ? 'hidden' : ''}`}>
                                     <ImagePlus size={15} className='text-slate-400' />
@@ -257,7 +257,7 @@ const TemplateDev: React.FC<TemplateDevProps> = ({
                 </div>
             </div>
 
-            <button onClick={handleDownloadPDF} className="flex items-center gap-2 px-4 py-2 bg-customizable fixed bottom-5 right-5 text-white rounded-md duration-200 hover:bg-customizable/90">
+            <button onClick={handleDownloadPDF} disabled={summary.length < 1 || experience.length < 1 || skills.length < 1 || languages.length < 1 || education.length < 1 || certifications.length < 1 || references.length < 1} className={`${(summary.length < 1 || experience.length < 1 || skills.length < 1 || languages.length < 1 || education.length < 1 || certifications.length < 1 || references.length < 1) && 'opacity-50'} flex items-center gap-2 px-4 py-2 bg-customizable fixed bottom-5 right-5 text-white rounded-md duration-200 hover:bg-customizable/90`}>
                 Descargar <FileText size={18} />
             </button>
         </div>
